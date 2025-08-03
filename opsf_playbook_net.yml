@@ -1,0 +1,17 @@
+- name: crear configuración de interfaces
+  hosts: R2
+  gather_facts: no
+  connection: ansible.netcommon.netconf
+
+  tasks:
+ - name: Aplicar OSPF a R2
+      ansible.netcommon.netconf_config:
+        target: running
+        content: "{{ lookup('file', 'configs/ospf_config.xml') }}"
+        
+    - name: Aplicar REDES a R2
+      ansible.netcommon.netconf_config:
+        target: running
+        content: "{{ lookup('file', 'configs/add_ospf_network.xml') }}"
+        
+        

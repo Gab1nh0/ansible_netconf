@@ -1,0 +1,10 @@
+  hosts: R2
+  gather_facts: no
+  connection: ansible.netcommon.netconf
+
+  tasks:
+    - name: Aplicar configuración de interfaces a R2 
+      ansible.netcommon.netconf_config:
+        target: running
+        content: "{{ lookup('file', 'configs/r2_interfaces.xml') }}"
+        
